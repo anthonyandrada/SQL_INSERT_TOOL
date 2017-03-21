@@ -23,7 +23,7 @@ class InsertTool(object):
                 for line in fi:
                     first = True
                     records = line.split("\t")
-                    fo.write("INSERT INTO " + tableName + "(")
+                    fo.write("INSERT INTO " + tableName + " (")
                     for field in fieldNames:
                         if first:
                             fo.write(field)
@@ -33,25 +33,23 @@ class InsertTool(object):
                     fo.write(") VALUES (")
                     first = True         
                     for record in records:
-                        if isfloat(record):
-                            record = float(record)
                         if first:
                             if record:
-                                if isfloat(record):
-                                    record = float(record)
-                                    fo.write(record)
+                                r = record.rstrip()
+                                if r.isdigit():
+                                    fo.write(r)
                                 else:
-                                    fo.write("'" + record + "'")
+                                    fo.write("'" + r + "'")
                             else:
                                 fo.write("NULL")    
                             first = False
                         else:
                             if record:
-                                if isfloat(record):
-                                    record = float(record)
-                                    fo.write(", " + record)
+                                r = record.rstrip()
+                                if r.isdigit():
+                                    fo.write(", " + r)
                                 else:    
-                                    fo.write(", '" + record + "'")
+                                    fo.write(", '" + r + "'")
                             else:
                                 fo.write(", NULL")       
                     fo.write(");\n")    
