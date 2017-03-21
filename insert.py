@@ -29,7 +29,7 @@ class InsertTool(object):
                             fo.write(field)
                             first = False
                         else:
-                            fo.write("," + field)
+                            fo.write(", " + field)
                     fo.write(") VALUES (")
                     first = True         
                     for record in records:
