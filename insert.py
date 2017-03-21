@@ -33,15 +33,25 @@ class InsertTool(object):
                     fo.write(") VALUES (")
                     first = True         
                     for record in records:
+                        if isfloat(record):
+                            record = float(record)
                         if first:
                             if record:
-                                fo.write("'" + record + "'")
+                                if isfloat(record):
+                                    record = float(record)
+                                    fo.write(record)
+                                else:
+                                    fo.write("'" + record + "'")
                             else:
                                 fo.write("NULL")    
                             first = False
                         else:
                             if record:
-                                fo.write(",'" + record + "'")
+                                if isfloat(record):
+                                    record = float(record)
+                                    fo.write(", " + record)
+                                else:    
+                                    fo.write(", '" + record + "'")
                             else:
                                 fo.write(", NULL")       
                     fo.write(");\n")    
