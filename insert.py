@@ -35,7 +35,8 @@ class InsertTool(object):
                     for record in records:
                         if first:
                             if record:
-                                r = record.rstrip()
+                                r = record.replace("'", "''")
+                                r = r.rstrip()
                                 if r.isdigit():
                                     fo.write(r)
                                 else:
@@ -45,7 +46,8 @@ class InsertTool(object):
                             first = False
                         else:
                             if record:
-                                r = record.rstrip()
+                                r = record.replace("'", "''")
+                                r = r.rstrip()
                                 if r.isdigit():
                                     fo.write(", " + r)
                                 else:    
